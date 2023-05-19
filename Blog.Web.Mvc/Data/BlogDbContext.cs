@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using VeriTaabani1.Data;
+using Blog.Web.Mvc.Data.Entity;
+
 
 namespace Blog.Web.Mvc.Data
 {
@@ -22,9 +23,6 @@ namespace Blog.Web.Mvc.Data
             base.OnConfiguring(builder);
         }
         ///////////////seed kısmı, metodun kendisi Dbseeder.cs içerisinde 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-        {
-            Dbseeder.SeedData(modelBuilder);
-        }
+       
     }
 }

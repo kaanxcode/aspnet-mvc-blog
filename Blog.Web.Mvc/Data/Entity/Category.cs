@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace VeriTaabani1.Data.Entity;
+namespace Blog.Web.Mvc.Data.Entity;
 
 public class Category
 {
