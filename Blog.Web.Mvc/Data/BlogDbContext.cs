@@ -18,11 +18,15 @@ namespace Blog.Web.Mvc.Data
         //2.VeriTabanının Konfigrasyonu
         protected override void OnConfiguring(DbContextOptionsBuilder builder)
         {
-            string connectionString = "Server=(localdb)\\MSSQLLocalDB;DataBase=DB1;";
+            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=DB1;";
             builder.UseSqlServer(connectionString);
             base.OnConfiguring(builder);
         }
-        ///////////////seed kısmı, metodun kendisi Dbseeder.cs içerisinde 
-       
-    }
+		///////////////seed kısmı, metodun kendisi Dbseeder.cs içerisinde 
+		protected override void OnModelCreating(ModelBuilder modelBuilder)
+		{
+            modelBuilder.Entity<Post>().HasMany(p => p.Categories ).WithMany(p=>p.Posts);
+			base.OnModelCreating(modelBuilder);
+		}
+	}
 }
