@@ -1,4 +1,7 @@
-﻿namespace Blog.Web.Mvc.Data
+﻿using Blog.Web.Mvc.Data.Entity;
+using System;
+
+namespace Blog.Web.Mvc.Data
 {
 	public  class DbSeeder
 	{
