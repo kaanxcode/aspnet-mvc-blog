@@ -20,14 +20,7 @@ var app = builder.Build();
 
 using (var scope = app.Services.CreateScope())
 {
-    // Veritabaný servisine eriþim saðlar.
-    var context = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
-    // Veritabanýný sil
-    context.Database.EnsureDeleted();
-    // Veritabanýný oluþturur
-    context.Database.EnsureCreated();
-
-	DbSeeder.Seed(context);
+	ServiceExtensions.EnsureDeletedAndCreated(scope);
 }
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())

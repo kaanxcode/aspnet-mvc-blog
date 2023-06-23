@@ -8,27 +8,28 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace Blog.Business
 {
     public static class ServiceExtensions
-	{
-		public static IServiceCollection AddBusinessServices(this IServiceCollection services, IConfiguration configuration)
-		{
-			services.AddDbContext<BlogDbContext>()/*(o =>
+    {
+        public static IServiceCollection AddBusinessServices(this IServiceCollection services, IConfiguration configuration)
+        {
+            services.AddDbContext<BlogDbContext>(o =>
             {
                 string connectionString = configuration.GetConnectionString("Default");
                 o.UseSqlServer(connectionString);
-            })*/;
-			services.AddTransient<PostService>();
-			services.AddTransient<CategoryService>();
-			services.AddTransient<PageService>();
-			services.AddTransient<SettingService>();
-			services.AddTransient<UserService>();
-			return services;
-		}
-		public static void EnsureDeletedAndCreated(IServiceScope scope)
-		{
+            });
+            services.AddTransient<PostService>();
+            services.AddTransient<CategoryService>();
+            services.AddTransient<PageService>();
+            services.AddTransient<SettingService>();
+            services.AddTransient<UserService>();
+            return services;
+        }
+        public static void EnsureDeletedAndCreated(IServiceScope scope)
+        {
 			// Veritabanı servisine erişim sağlar.
 			var context = scope.ServiceProvider.GetRequiredService<BlogDbContext>();
 			// Veritabanını sil
@@ -38,7 +39,5 @@ namespace Blog.Business
 
 			Dbseeder.Seed(context);
 		}
-
-
-	}
+    }
 }
