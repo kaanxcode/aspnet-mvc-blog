@@ -1,12 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Data;
 
 namespace Blog.Web.Mvc.Areas.Admin.Controllers
 {
-    public class UserController : Controller
-    {
-        public IActionResult Index()
-        {
-            return View();
-        }
-    }
+	[Area("Admin")]
+	[Authorize(Roles = "Admin")]
+
+	public class UserController : Controller
+	{
+		public IActionResult Index()
+		{
+			return View();
+		}
+	}
 }

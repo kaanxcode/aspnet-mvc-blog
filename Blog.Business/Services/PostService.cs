@@ -38,7 +38,7 @@ namespace Blog.Business.Services
             _db.SaveChanges();
         }
 
-        public void Update(PostDto post)
+        public void Update(int id, PostDto post)
         {
             var oldPost = _db.Posts.FirstOrDefault(p => p.Id == post.Id);
             if (oldPost != null)
