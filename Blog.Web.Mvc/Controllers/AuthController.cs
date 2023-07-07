@@ -1,9 +1,10 @@
-﻿using Blog.Web.Mvc.Data;
-using Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Business.Dtos;
+using Blog.Business.Services.Abstract;
 using Blog.Web.Mvc.Models;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.IdentityModel.Tokens;
 using System;
 using System.Security.Claims;
 
@@ -11,11 +12,11 @@ namespace Blog.Web.Mvc.Controllers
 {
 	public class AuthController : Controller
 	{
-		private readonly BlogDbContext _db;
+		private readonly IUserService _userService;
 
-		public AuthController(BlogDbContext db)
+		public AuthController(IUserService us)
 		{
-			_db = db;
+			_userService = us;
 		}
 
 		public IActionResult Register() => View();
@@ -23,11 +24,10 @@ namespace Blog.Web.Mvc.Controllers
 		[HttpPost]
 		public IActionResult Register(RegisterViewModel model)
 		{
+			if (HttpContext.User.Identity.IsAuthenticated) return Redirect("/");
 			if (ModelState.IsValid)
 			{
-				var user = new User { Name = model.Name, City = model.City, Email = model.Email, Password = model.Password, Phone = model.Phone };
-				_db.Users.Add(user);
-				_db.SaveChanges();
+				_userService.Insert(new UserDto { Name = model.Name, Email = model.Email, Password = model.Password, Phone = model.Phone != null ? model.Phone : "", City = model.City != null ? model.City : "" });
 				return RedirectToAction(nameof(Login));
 			}
 			else
@@ -42,27 +42,17 @@ namespace Blog.Web.Mvc.Controllers
 		[HttpPost]
 		public async Task<IActionResult> Login(LoginViewModel model)
 		{
+			if (HttpContext.User.Identity.IsAuthenticated) return Redirect("/");
+
 			if (ModelState.IsValid)
 			{
-				var user = _db.Users.FirstOrDefault(e => e.Email == model.Email && e.Password == model.Password);
+				var user = _userService.GetByEmailPassword(model.Email, model.Password);
 				if (user != null)
 				{
-					var claims = new List<Claim>
-					{
-						new Claim("Id",Convert.ToString(user.Id)),
-						new Claim(ClaimTypes.Name, user.Name),
-						new Claim(ClaimTypes.Email, user.Email),
-						new Claim("City",user.City),
-						new Claim("Password",user.Password),
-						new Claim(ClaimTypes.MobilePhone, user.Phone)
-					};
-					var identity = new ClaimsIdentity(claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-					var principal = new ClaimsPrincipal(identity);
-
 					var props = new AuthenticationProperties() { ExpiresUtc = DateTime.UtcNow.AddMinutes(60) };
 
-					await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, principal, props);
+					await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, _userService.ConvertToPrincipal(user), props);
+					if (!user.Roles.IsNullOrEmpty() && user.Roles.Contains("Admin")) return Redirect("/Admin/home");
 					return Redirect("/");
 				}
 				else

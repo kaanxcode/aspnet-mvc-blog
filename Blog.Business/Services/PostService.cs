@@ -9,9 +9,9 @@ namespace Blog.Business.Services
 {
     public class PostService : IPostService
     {
-        private readonly AppDbContext _db;
+        private readonly BlogDbContext _db;
 
-        public PostService(AppDbContext db)
+        public PostService(BlogDbContext db)
         {
             // Post koleksiyonunu başlatma veya veritabanından veri çekme işlemleri burada yapılabilir
             _db = db;

@@ -6,8 +6,8 @@ namespace Blog.Business.Services
 {
 	public class SettingService : ISettingService
 	{
-		private readonly AppDbContext _db;
-		public SettingService(AppDbContext db)
+		private readonly BlogDbContext _db;
+		public SettingService(BlogDbContext db)
 		{
 			_db = db;
 		}

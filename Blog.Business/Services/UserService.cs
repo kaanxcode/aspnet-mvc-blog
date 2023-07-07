@@ -8,8 +8,8 @@ namespace Blog.Business.Services
 {
 	public class UserService : IUserService
 	{
-		private readonly AppDbContext _db;
-		public UserService(AppDbContext db)
+		private readonly BlogDbContext _db;
+		public UserService(BlogDbContext db)
 		{
 			_db = db;
 		}
@@ -71,5 +71,6 @@ namespace Blog.Business.Services
 
 			return new ClaimsPrincipal(identity);
 		}
+
 	}
 }

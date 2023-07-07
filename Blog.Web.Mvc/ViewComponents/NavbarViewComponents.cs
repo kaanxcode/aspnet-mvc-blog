@@ -1,5 +1,5 @@
 ﻿using Blog.Web.Mvc.Data;
-using Blog.Web.Mvc.Data.Entity;
+using Blog.Data.Entity;
 using Microsoft.AspNetCore.Mvc;
 using System;
 
@@ -13,10 +13,10 @@ namespace Blog.Web.Mvc.ViewComponents
         {
             db = Db;
         }
-
+        /*
         public async Task<IViewComponentResult> InvokeAsync()
         {
-            //AppDbContext Db;
+            //BlogDbContext Db;
             //db = Db;
 
             return View(
@@ -28,5 +28,6 @@ namespace Blog.Web.Mvc.ViewComponents
                 );
             //return View();
         }
+        */
     }
 }

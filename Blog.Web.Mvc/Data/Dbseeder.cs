@@ -1,4 +1,6 @@
-﻿namespace Blog.Web.Mvc.Data
+﻿using Blog.Data.Entity;
+
+namespace Blog.Web.Mvc.Data
 {
 	public  class DbSeeder
 	{
@@ -17,7 +19,7 @@
 			if (!context.Categories.Any())
 			{
 				// Kategorileri oluşturma
-				var categories = new Category[]
+				var categories = new List<Category>
 				{
 					new Category { Name = "Teknoloji", Slug = "teknoloji" },
 					new Category { Name = "Spor", Slug = "spor" },

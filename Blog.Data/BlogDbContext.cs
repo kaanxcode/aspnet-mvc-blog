@@ -1,13 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Blog.Web.Mvc.Data.Entity;
+using Blog.Data.Entity;
+using System;
 
 
-namespace Blog.Web.Mvc.Data
+namespace Blog.Data
 {
     public class BlogDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryPost> CategoryPosts { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostComment> PostComments { get; set; }
@@ -15,13 +15,10 @@ namespace Blog.Web.Mvc.Data
         public DbSet<Setting> Settings { get; set; }
         public DbSet<User> Users { get; set; }
 
-        //2.VeriTabanının Konfigrasyonu
-        protected override void OnConfiguring(DbContextOptionsBuilder builder)
-        {
-            string connectionString = "Server=(localdb)\\MSSQLLocalDB;Database=DB1;";
-            builder.UseSqlServer(connectionString);
-            base.OnConfiguring(builder);
-        }
+		//2.VeriTabanının Konfigrasyonu
+		public BlogDbContext(DbContextOptions<BlogDbContext> options) : base(options)
+		{
+		}
 		///////////////seed kısmı, metodun kendisi Dbseeder.cs içerisinde 
 		protected override void OnModelCreating(ModelBuilder modelBuilder)
 		{

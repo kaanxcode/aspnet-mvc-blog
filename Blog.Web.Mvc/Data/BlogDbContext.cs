@@ -1,5 +1,5 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using Blog.Web.Mvc.Data.Entity;
+using Blog.Data.Entity;
 
 
 namespace Blog.Web.Mvc.Data
@@ -7,7 +7,6 @@ namespace Blog.Web.Mvc.Data
     public class BlogDbContext : DbContext
     {
         public DbSet<Category> Categories { get; set; }
-        public DbSet<CategoryPost> CategoryPosts { get; set; }
         public DbSet<Page> Pages { get; set; }
         public DbSet<Post> Posts { get; set; }
         public DbSet<PostComment> PostComments { get; set; }

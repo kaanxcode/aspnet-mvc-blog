@@ -1,11 +1,10 @@
-using Blog.Web.Mvc.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Blog.Business;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-builder.Services.AddDbContext<BlogDbContext>();
 builder.Services.AddBusinessServices(builder.Configuration);
 
 

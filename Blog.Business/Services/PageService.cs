@@ -7,8 +7,8 @@ namespace Blog.Business.Services
 {
 	public class PageService : IPageService
 	{
-		private readonly AppDbContext _db;
-		public PageService(AppDbContext db)
+		private readonly BlogDbContext _db;
+		public PageService(BlogDbContext db)
 		{
 			_db = db;
 		}

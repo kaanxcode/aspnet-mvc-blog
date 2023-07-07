@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Blog.Data;
 
 namespace Blog.Business
 {
@@ -21,11 +22,11 @@ namespace Blog.Business
                 string connectionString = configuration.GetConnectionString("Default");
                 o.UseSqlServer(connectionString);
             });
-            services.AddTransient<PostService>();
-            services.AddTransient<CategoryService>();
-            services.AddTransient<PageService>();
-            services.AddTransient<SettingService>();
-            services.AddTransient<UserService>();
+            services.AddTransient<IPostService, PostService>();
+            services.AddTransient<ICategoryService,CategoryService>();
+            services.AddTransient<IPageService,PageService>();
+            services.AddTransient<ISettingService, SettingService>();
+            services.AddTransient<IUserService, UserService>();
             return services;
         }
         public static void EnsureDeletedAndCreated(IServiceScope scope)
@@ -37,7 +38,7 @@ namespace Blog.Business
 			// Veritabanını oluşturur
 			context.Database.EnsureCreated();
 
-			Dbseeder.Seed(context);
+            DbSeeder.Seed(context);
 		}
     }
 }

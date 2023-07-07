@@ -1,14 +1,27 @@
-﻿namespace Blog.Web.Mvc.Data.Entity;
+﻿using Blog.Data.Entity.Abstract;
+using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-public class Post
+namespace Blog.Data.Entity;
+
+public class Post : AuditEntity
 {
-    public int Id { get; set; }
-    public int UserId { get; set; }
-    public string Title { get; set; }
-    public string Content { get; set; }
+	[Key]
+	public int Id { get; set; }
 
-    public List<Category> Categories { get; set; }
+	
+	public int UserId { get; set; }
+	public User User { get; set; }
 
+
+	[Required]
+	[Column(TypeName = "nvarchar(200)")]
+	public string? Title { get; set; }
+
+	[Required]
+	[Column(TypeName = "nvarchar(max)")]
+	public string? Content { get; set; }
+
+	// Navigation Properties
+	public List<Category>? Categories { get; set; }
 }
-
-

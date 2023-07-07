@@ -7,9 +7,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Web.Mvc", "Blog.Web.Mv
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Data", "Blog.Data\Blog.Data.csproj", "{03CC0B11-EF63-4BDA-AF17-6D8AB3F69DBF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Web.Api", "Blog.Web.Api\Blog.Web.Api.csproj", "{B9AA95A3-9A77-4F8E-B4DC-2AD400EE4836}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Web.Api", "Blog.Web.Api\Blog.Web.Api.csproj", "{B9AA95A3-9A77-4F8E-B4DC-2AD400EE4836}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Blog.Business", "Blog.Business\Blog.Business.csproj", "{682B4593-72EE-4557-BEBD-453BCCE94B78}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blog.Business", "Blog.Business\Blog.Business.csproj", "{682B4593-72EE-4557-BEBD-453BCCE94B78}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{89ABA562-8C6D-493C-B818-B1C06C489474}"
+	ProjectSection(SolutionItems) = preProject
+		.editorconfig = .editorconfig
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
